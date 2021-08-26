@@ -1,2 +1,2 @@
 # GetVkMeToken
-Get a Vk Me token.
+Vk has closed the possibility of obtaining a Vk Me token. But with this code, you can get it.
