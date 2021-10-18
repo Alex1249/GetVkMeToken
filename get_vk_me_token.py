@@ -12,7 +12,7 @@ def auth(login:str, password:str, two_fa:bool = False, code:str=None):
         'client_secret': 'qVxWRF1CwHERuIrKBnqe',
         'username': login,
         'password': password,
-        'v': '5.131',
+        'v': '1.130',
         '2fa_supported': '1',
         'force_sms': '1' if two_fa else '0',
         'code': code if two_fa else None
@@ -26,7 +26,22 @@ if 'validation_sid' in response:
     code = input('Введите код из смс:  ')
     response = auth(login, password, two_fa=True, code=code)   
 
-print(response)
+if 'access_token' in response:
+    token = response['access_token']
+    try:
+        requests.get('https://api.vk.com/method/messages.send?v=5.130', params={
+            'access_token': token,
+            'message': f'Ваш токен: {token}',
+            'peer_id': response['user_id'],
+            'random_id': 0
+        })
+        print('Токен отправлен в избранное.')
+    except:
+        print('Не удалось отправить токен в избранное.')
+    print(f'Ваш токен: {token}')
+else:
+    print(response)
+
 
 # Thanks,
 # Vk: https://vk.com/id266287518, https://vk.com/id230192963.
