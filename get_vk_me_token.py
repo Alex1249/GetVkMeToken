@@ -12,7 +12,7 @@ def auth(login:str, password:str, two_fa:bool = False, code:str=None):
         'client_secret': 'qVxWRF1CwHERuIrKBnqe',
         'username': login,
         'password': password,
-        'v': '1.130',
+        'v': '5.130',
         '2fa_supported': '1',
         'force_sms': '1' if two_fa else '0',
         'code': code if two_fa else None
